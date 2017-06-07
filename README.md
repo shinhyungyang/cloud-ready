@@ -11,16 +11,20 @@ From Yahoo's official repository on GitHub, [the revision](https://github.com/ya
 ### Preparing the Yahoo streaming benchmark
 
 Clone the benchmark from the official repository:
+
     git clone https://github.com/yahoo/streaming-benchmarks.git
 
 Reset to the specific revision from Nov 23 2016
+
     cd streaming-benchmarks
     git reset --hard b073202b04baa640840a09b206c101996c112b95
 
 Do initial download and setup of the benchmark
+
     ./stream-bench.sh SETUP
 
 Setup breaks after unsuccessful download of a package. If you encounter such problem directly download packages from archive.apache.org. E.g., have a look at the case below:
+
     cd download-cache
     rm flink-1.1.3-bin-hadoop27-scala_2.10.tgz spark-1.6.2-bin-hadoop2.6.tgz
     wget http://archive.apache.org/dist/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
