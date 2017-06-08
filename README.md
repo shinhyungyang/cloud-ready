@@ -34,7 +34,7 @@ Setup breaks after unsuccessful download of a package. If you encounter such pro
     ./stream-bench.sh SETUP
 
 ### Applying Patches
-Patch files is going to be provided in this repository very soon. You may apply a patch file to your Yahoo streaming benchmark folder of each Cloud node according to the table below:
+You may apply a patch file to your Yahoo streaming benchmark folder of each Cloud node according to the table below:
 
 | Instance_Name          | Patch_Name    | Internal_IP  |
 | ---------------------- |:-------------:| ------------:|
