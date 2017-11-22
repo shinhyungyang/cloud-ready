@@ -1,3 +1,9 @@
+# Light-weight, High-resolution Profiling on Data Streams
+
+*cloud_profiler* is a native library for profiling tuples in data streams on the Cloud. Please find the link below to get the implementation artefacts of the paper "*Scalability and States: A Critical Assessment of Big Data Stream Engine Scalability and States: A Critical Assessment of Big Data Stream Engine*", which is submitted for FGCS Special Issue on New Landscapes of the Data Stream Processing in the era of Fog Computing.
+
+* Artefacts: http://elc.yonsei.ac.kr/cloud_profiler/index.html
+
 # Cloud-Ready Configuration for Yahoo Streaming Benchmarks
 
 Code licensed under the Apache 2.0 license. See LICENSE file for terms.
