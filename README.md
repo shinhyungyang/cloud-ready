@@ -1,45 +1,45 @@
 # Light-weight, High-resolution Profiling on Data Streams
 
-*cloud_profiler* is a native library for profiling tuples in data streams on the Cloud. Please find the link below to get the implementation artefacts of the paper "*Scalability and States: A Critical Assessment of Big Data Stream Engine Scalability and States: A Critical Assessment of Big Data Stream Engine*", which is submitted for FGCS Special Issue on New Landscapes of the Data Stream Processing in the era of Fog Computing.
+**cloud_profiler** is a native library for profiling tuples in data streams on the Cloud. Please find the link below to get the implementation artefacts of the paper "*Scalability and States: A Critical Assessment of Big Data Stream Engine Performance for Applications with and without State Information*", which is submitted for [FGCS Special Issue on New Landscapes of the Data Stream Processing in the era of Fog Computing](https://www.journals.elsevier.com/future-generation-computer-systems/call-for-papers/special-issue-on-new-landscapes-of-the-data-stream-processin).
 
-* Artefacts: http://elc.yonsei.ac.kr/cloud_profiler/index.html
+* Artefacts: http://git.elc.cs.yonsei.ac.kr/bburg/cloud_profiler
 
 # Cloud-Ready Configuration for Yahoo Streaming Benchmarks
 
 Code licensed under the Apache 2.0 license. See LICENSE file for terms.
 
-### Motivation
+## Motivation
 Yahoo streaming framework is the first result to create a benchmark for state-of-the-art Big Data streaming platforms. However, currently available Yahoo streaming benchmark only simulates the benchmark on a single node setup. Preparing the State and Scalability paper for [Auto-DaSP 2017](http://calvados.di.unipi.it/auto-dasp-17/), I was able to come up with a production-ready Cloud configuration for Yahoo streaming benchmark.
 
-### Prerequisites
+## Prerequisites
 From Yahoo's official repository on GitHub, [the revision](https://github.com/yahoo/streaming-benchmarks/tree/b073202b04baa640840a09b206c101996c112b95) committed on Nov 23 2016 is used. This configuration requires 30 nodes on Cloud computing platform. I recommend to use [Google Compute Engine](https://cloud.google.com/compute). Each node is configured with 16 vCPUs and 24 GB main memory in my Cloud setup. Please note that each node has two properties: Instance_Name and Internal_IP. Instance_Name is specific to Google Compute Engine and is used as an alias for each node. You may want to create a Cloud node manually in order to manually allocate internal IPs. Otherwise, all occurrences of IP addresses in the provided patch files need to be replaced according to your setup, in which case refer to the table below.
 
-### Preparing the Yahoo streaming benchmark
+## Preparing the Yahoo streaming benchmark
 
 Clone the benchmark from the official repository:
-
-    git clone https://github.com/yahoo/streaming-benchmarks.git
-
+```sh
+git clone https://github.com/yahoo/streaming-benchmarks.git
+```
 Reset to the specific revision from Nov 23 2016
-
-    cd streaming-benchmarks
-    git reset --hard b073202b04baa640840a09b206c101996c112b95
-
+```sh
+cd streaming-benchmarks
+git reset --hard b073202b04baa640840a09b206c101996c112b95
+```
 Do initial download and setup of the benchmark
-
-    ./stream-bench.sh SETUP
-
+```sh
+./stream-bench.sh SETUP
+```
 Setup breaks after unsuccessful download of a package. If you encounter such problem directly download packages from archive.apache.org. E.g., have a look at the case below:
-
-    cd download-cache
-    rm flink-1.1.3-bin-hadoop27-scala_2.10.tgz spark-1.6.2-bin-hadoop2.6.tgz
-    wget http://archive.apache.org/dist/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
-    wget http://archive.apache.org/dist/spark/spark-1.6.2/spark-1.6.2-bin-hadoop2.6.tgz
-    # Continue with setup
-    cd ..
-    ./stream-bench.sh SETUP
-
-### Applying Patches
+```sh
+cd download-cache
+rm flink-1.1.3-bin-hadoop27-scala_2.10.tgz spark-1.6.2-bin-hadoop2.6.tgz
+wget http://archive.apache.org/dist/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
+wget http://archive.apache.org/dist/spark/spark-1.6.2/spark-1.6.2-bin-hadoop2.6.tgz
+# Continue with setup
+cd ..
+./stream-bench.sh SETUP
+```
+## Applying Patches
 You may apply a patch file to your Yahoo streaming benchmark folder of each Cloud node according to the table below:
 
 | Instance_Name          | Patch_Name    | Internal_IP  |
@@ -76,31 +76,31 @@ You may apply a patch file to your Yahoo streaming benchmark folder of each Clou
 | streaming-group-0-0030 | dg.patch      | 10.140.0.130 |
 
 Once you are ready with patch files, change current path to the parent of your Yahoo streaming benchmark directory and enter below command:
-
-    cd /path/to/your/streaming-benchmarks/..
-    patch -p0 --ignore-whitespace < /path/to/your/Patch_Name
-
-### Preparing Cloud Nodes
+```sh
+cd /path/to/your/streaming-benchmarks/..
+patch -p0 --ignore-whitespace < /path/to/your/Patch_Name
+```
+## Preparing Cloud Nodes
 In order to run Kafka cluster, each Kafka broker node needs a log directory. Refer to `logs.dir` attribute of the Kafka configuration file in each of your Kafka broker nodes located at `streaming-benchmarks/kafka_2.10-0.8.2.1/config`.
 
-### Additional Installation
+## Additional Installation
 As soon as I was confronted with problems from using Storm's internal dev-zookeeper for setting up Zookeeper cluster, I added standalone zookeeper of the same version. Follow the instruction to add the application to the framework:
-
-    cd streaming-benchmarks
-    wget http://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
-    tar xf zookeeper-3.4.6.tar.gz
-    rm zookeeper-3.4.6.tar.gz
-
+```sh
+cd streaming-benchmarks
+wget http://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+tar xf zookeeper-3.4.6.tar.gz
+rm zookeeper-3.4.6.tar.gz
+```
 In order to execute the benchmark's data-generator Clojure script, download and setup lein as follows:
-
-    mkdir ~/bin
-    cd ~/bin
-    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-    chmod +x ./lein
-
+```sh
+mkdir ~/bin
+cd ~/bin
+wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+chmod +x ./lein
+```
 Then, modify line # 19 of your `streaming-benchmarks/stream-bench.sh` to correctly locate your copy of lein.
-
-    LEIN="/home/your_account_name/bin/lein"
-
-### Contact
+```sh
+LEIN="/home/your_account_name/bin/lein"
+```
+## Contact
 Please open a new issue to contact the author.
