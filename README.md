@@ -1,9 +1,26 @@
 # Cloud-Ready Configuration for Yahoo Streaming Benchmarks
 
-Code licensed under the Apache 2.0 license. See LICENSE file for terms.
+## Introduction
+Yahoo streaming framework is the first result to create a benchmark for state-of-the-art Big Data streaming platforms. However, the currently available Yahoo streaming benchmark only provides Cloud configuration used in the experiemnts of the paper for [Auto-DaSP 2017](http://calvados.di.unipi.it/auto-dasp-17/). When you use the repository, please cite the following paper:
 
-## Motivation
-Yahoo streaming framework is the first result to create a benchmark for state-of-the-art Big Data streaming platforms. However, currently available Yahoo streaming benchmark only simulates the benchmark on a single node setup. Preparing the State and Scalability paper for [Auto-DaSP 2017](http://calvados.di.unipi.it/auto-dasp-17/), I was able to come up with a production-ready Cloud configuration for Yahoo streaming benchmark.
+```
+@inproceedings{ScalabilityAndState,
+  title = {Scalability and State:
+           {A} Critical Assessment of Throughput Obtainable on
+           Big Data Streaming Frameworks for
+           Applications With and Without State Information},
+  author = {Shinhyung Yang and Yonguk Jeong and ChangWan Hong and Hyunje Jun
+            and Bernd Burgstaller},
+  booktitle = {Euro-Par 2017: Parallel Processing Workshops -
+               Euro-Par 2017 International Workshops, Santiago de Compostela, Spain,
+               August 28-29, 2017, Revised Selected Papers},
+  series = "Lecture Notes in Computer Science",
+  volume = "10659",
+  pages = "141--152",
+  year = "2017",
+  doi = "https://doi.org/10.1007/978-3-319-75178-8\_12",
+}
+```
 
 ## Prerequisites
 From Yahoo's official repository on GitHub, [the revision](https://github.com/yahoo/streaming-benchmarks/tree/b073202b04baa640840a09b206c101996c112b95) committed on Nov 23 2016 is used. This configuration requires 30 nodes on Cloud computing platform. I recommend to use [Google Compute Engine](https://cloud.google.com/compute). Each node is configured with 16 vCPUs and 24 GB main memory in my Cloud setup. Please note that each node has two properties: Instance_Name and Internal_IP. Instance_Name is specific to Google Compute Engine and is used as an alias for each node. You may want to create a Cloud node manually in order to manually allocate internal IPs. Otherwise, all occurrences of IP addresses in the provided patch files need to be replaced according to your setup, in which case refer to the table below.
@@ -98,3 +115,6 @@ LEIN="/home/your_account_name/bin/lein"
 ```
 ## Contact
 Please open a new issue to contact the author.
+
+## License
+Code licensed under the Apache 2.0 license. See LICENSE file for terms.
