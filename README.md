@@ -118,3 +118,10 @@ Please open a new issue to contact the author.
 
 ## License
 Code licensed under the Apache 2.0 license. See LICENSE file for terms.
+
+## Acknowledgements
+
+This work was supported by the Next-Generation Information Computing
+Development Program through the National Research Foundation of
+Korea (NRF), funded by the Ministry of Science, ICT & Future Planning
+under grant NRF-2015-M3C4A-7065522.
